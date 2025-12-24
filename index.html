@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Melody Sketch</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <div id="app">
+    <header class="control-panel">
+      <!-- Row 1: Logo, Transport, Tools, Actions -->
+      <div class="control-row">
+        <div class="logo">Melody Sketch</div>
+
+        <div class="controls-group">
+          <button id="rewind-btn" class="btn" title="Rewind to Start">|&lt;</button>
+          <button id="play-btn" class="btn primary" title="Play/Pause (Space)">▶ Play</button>
+          <button id="stop-btn" class="btn" title="Stop">■ Stop</button>
+        </div>
+
+        <div class="controls-group">
+          <fieldset style="display: inline; border: none; padding: 0; margin: 0;">
+            <label><input type="radio" name="tool" value="draw" checked> Draw (D)</label>
+            <label><input type="radio" name="tool" value="erase"> Erase (E)</label>
+          </fieldset>
+        </div>
+
+        <div class="shortcuts-legend">
+          Keys: Space (Play/Pause) / Z (Rewind) / Ctrl+Z (Undo)
+        </div>
+        <div class="spacer"></div>
+
+        <div class="controls-group">
+          <button id="clear-btn" class="btn danger" title="Clear All">Clear</button>
+          <button id="export-btn" class="btn secondary" title="Download MIDI">Export MIDI</button>
+        </div>
+      </div>
+
+      <!-- Row 2: Settings (Song & Note) -->
+      <div class="control-row settings-row">
+        <!-- Song Settings -->
+        <div class="controls-group section-group">
+          <span class="section-label">Song:</span>
+          <label>
+            BPM
+            <input type="number" id="bpm-input" value="120" min="40" max="240" style="width: 50px;">
+          </label>
+          <label>
+            Len
+            <select id="bar-count">
+              <option value="4" selected>4 Bars</option>
+              <option value="8">8 Bars</option>
+              <option value="16">16 Bars</option>
+              <option value="32">32 Bars</option>
+            </select>
+          </label>
+          <label>
+            Key
+            <select id="key-root">
+              <option value="C" selected>C</option>
+              <option value="C#">C#</option>
+              <option value="D">D</option>
+              <option value="D#">D#</option>
+              <option value="E">E</option>
+              <option value="F">F</option>
+              <option value="F#">F#</option>
+              <option value="G">G</option>
+              <option value="G#">G#</option>
+              <option value="A">A</option>
+              <option value="A#">A#</option>
+              <option value="B">B</option>
+            </select>
+          </label>
+          <label>
+            Scale
+            <select id="scale-type">
+              <option value="major" selected>Major</option>
+              <option value="minor">Minor</option>
+              <option value="dorian">Dorian</option>
+              <option value="phrygian">Phrygian</option>
+              <option value="lydian">Lydian</option>
+              <option value="mixolydian">Mixolydian</option>
+              <option value="locrian">Locrian</option>
+              <option value="chromatic">Chromatic</option>
+            </select>
+          </label>
+        </div>
+
+        <!-- Note Settings -->
+        <div class="controls-group section-group">
+          <span class="section-label">Note:</span>
+          <label>
+            Len
+            <select id="note-duration">
+              <option value="16">Whole</option>
+              <option value="8">Half</option>
+              <option value="4">Quarter</option>
+              <option value="2" selected>8th</option>
+              <option value="1">16th</option>
+            </select>
+          </label>
+          <label>
+            <input type="checkbox" id="note-dotted"> Dot
+          </label>
+          <label>
+            Sound
+            <select id="tone-select">
+              <option value="piano">Piano</option>
+              <option value="triangle" selected>Triangle</option>
+              <option value="sine">Sine</option>
+              <option value="square">Square</option>
+              <option value="sawtooth">Saw</option>
+            </select>
+          </label>
+        </div>
+      </div>
+    </header>
+
+    <main class="editor-container">
+      <div class="piano-roll-wrapper">
+        <canvas id="piano-roll-canvas"></canvas>
+      </div>
+    </main>
+  </div>
+  <!-- Load scripts in order -->
+  <script src="scales.js"></script>
+  <script src="audio.js"></script>
+  <script src="sequencer.js"></script>
+  <script src="midi_export.js"></script>
+  <script src="pianoroll.js"></script>
+  <script src="main.js"></script>
+</body>
+
+</html>
